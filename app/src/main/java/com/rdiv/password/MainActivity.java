@@ -8,6 +8,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+// ... (código previo)
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
+
 public class MainActivity extends AppCompatActivity {
 
     private EditText editTextUsername;
@@ -16,45 +21,38 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String usuarioCorrecto = "david";
+
     private String contraseñaCorrecta = "123456";
+
+    // ... (declaraciones previas)
+
+    private String contraseñaCorrectaHashed; // Almacena la contraseña hasheada
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-        editTextUsername = findViewById(R.id.idnombre);
-        editTextPassword = findViewById(R.id.idcontraseña);
-        btnLogin = findViewById(R.id.ingresar);
-
+        
+        contraseñaCorrectaHashed = PasswordHasher.hashPassword("123456");
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 String username = editTextUsername.getText().toString();
                 String password = editTextPassword.getText().toString();
 
-
                 if (username.isEmpty() || password.isEmpty()) {
-
-
                     Toast.makeText(MainActivity.this, "Por favor, completa todos los campos", Toast.LENGTH_SHORT).show();
                 } else {
+                    // Hashear la contraseña ingresada para compararla con la almacenada
+                    String passwordHashed = PasswordHasher.hashPassword(password);
 
-
-                    if (username.equals(usuarioCorrecto) && password.equals(contraseñaCorrecta)) {
-
+                    if (passwordHashed != null && username.equals(usuarioCorrecto) && passwordHashed.equals(contraseñaCorrectaHashed)) {
                         Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-
-
                         Intent intent = new Intent(MainActivity.this, InicioExitoso.class);
-
-
                         startActivity(intent);
                     } else {
-
                         Toast.makeText(MainActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
                     }
                 }

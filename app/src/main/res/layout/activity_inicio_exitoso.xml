@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/nieve"
     tools:context=".InicioExitoso">
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="205dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="300dp"
-        android:text="BIENVENIDO"
-        android:textSize="34sp"
+        android:layout_width="365dp"
+        android:layout_height="117dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="264dp"
+        android:text="BIENVENIDO A LA APP"
+        android:textAlignment="center"
+        android:textSize="48sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
